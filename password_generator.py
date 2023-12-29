@@ -51,12 +51,10 @@ def start(name, length, no_upper, no_lower, no_digits, no_special, begin_letter,
        """
        click.echo(colored(f.renderText('Password Generator'),'red'))
        click.echo(colored('Hello there %s' %name,'green'))
-    # print('Hello there %s' %name)
-       if not any([length, num_passwords, no_upper, no_lower, no_digits, no_special, begin_letter, begin_number,
+       if not any([no_upper, no_lower, no_digits, no_special, begin_letter, begin_number,
                 begin_special, no_similar, no_duplicates, no_sequential, hash_password,file]):
                     for i in track(range(100), description='Loading...'):
-                        time.sleep(0.01) # This gives us a nice loading bar
-                        
+                        time.sleep(0.01) # This gives us a nice loading bar   
                     click.echo(colored('Welcome to the Password Generator', 'blue'))
                     click.echo(colored('Please answer the following questions to generate your password', 'blue'))
                     length = click.prompt("How long do you want the password to be?", type=int)
@@ -68,7 +66,7 @@ def start(name, length, no_upper, no_lower, no_digits, no_special, begin_letter,
                     no_duplicates = not click.confirm("Exclude duplicate characters?")
                     no_sequential = not click.confirm("Exclude sequential characters?")
                     if click.confirm("Do you want to start the password with a particular type of character?"):
-                        # Ask for eac   h type individually
+                        # Ask for each type individually
                         begin_letter = False
                         begin_number = False
                         begin_special = False
