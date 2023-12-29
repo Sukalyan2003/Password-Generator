@@ -1,3 +1,10 @@
+
+# Password Generator
+#### Video Demo: https://youtu.be/YGleToNEEjk
+#### Description:
+
+**The Final app has been built into an executable using pyinstaller**
+
 This is where I'll make my first CLI program as the final project to CS50.
 Creating an entire project may seem daunting. Here are some questions that you should think about as you start:
 
@@ -5,18 +12,23 @@ Creating an entire project may seem daunting. Here are some questions that you s
   It will be a password generator that works in two ways. Either it will ask the user a set of questions about the parameters or work directly with the flags provided in the terminal.
 - What new skills will you need to acquire? What topics will you need to research?
   Complete CLI development is new to me. Along with that I have to learn about asynchronous code. Now I can work either with Javascript or Python and I haven't decided which one to use yet.
+  Update: I made it using Python.
+
 - In the world of software, most everything takes longer to implement than you expect. And so it’s not uncommon to accomplish less in a fixed amount of time than you hope. What might you consider to be a good outcome for your project? A better outcome? The best outcome?
   A good outcome would be a program that just works with the core functionality but doesn't have all the aesthetics or the flag options. 
   better outcome would be colours and aesthetics.
   Best outcome would be a complete sets of flags and pipeline support.
+  Update: Except for pipeline support, everything is present and working!!
 
 https://clig.dev/#the-basics
 
 The program will be a CLI application built using [[Python]] using the [click](https://click.palletsprojects.com/en/8.1.x/),[rich](https://github.com/Textualize/rich)
-and recorded for CS50 using [asciinema](https://asciinema.org/)
+
 
 Things to do
 1. Make the program such that it can take input from multiple file formats and give output in multiple formats.
+This one is still a work in progress.
+
 2. Make the program such that there is a detailed documentation built into it, much like a help command.
    **Display help text when passed no options, the `-h` flag, or the `--help` flag.**
    The concise help text should only include:

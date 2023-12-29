@@ -52,7 +52,7 @@ def start(name, length, no_upper, no_lower, no_digits, no_special, begin_letter,
        click.echo(colored(f.renderText('Password Generator'),'red'))
        click.echo(colored('Hello there %s' %name,'green'))
     # print('Hello there %s' %name)
-       if not any([no_upper, no_lower, no_digits, no_special, begin_letter, begin_number,
+       if not any([length, num_passwords, no_upper, no_lower, no_digits, no_special, begin_letter, begin_number,
                 begin_special, no_similar, no_duplicates, no_sequential, hash_password,file]):
                     for i in track(range(100), description='Loading...'):
                         time.sleep(0.01) # This gives us a nice loading bar
@@ -94,7 +94,8 @@ def start(name, length, no_upper, no_lower, no_digits, no_special, begin_letter,
                                         begin_letter, begin_number, begin_special,
                                         no_similar, no_duplicates, no_sequential)
            passwords.append(password)
-
+       if (begin_letter and (no_upper or no_lower)) or (begin_number and no_digits) or (begin_special and no_special):
+        click.echo(colored('Beginning character of choice is excluded, so using something else', 'red'))
        for i, password in enumerate(passwords, start=1):
             if hash_password:
                 hashed_password = hashlib.sha256(password.encode()).hexdigest()
@@ -113,6 +114,7 @@ def generate_single_password(length, no_upper, no_lower, no_digits, no_special,
                             no_similar, no_duplicates, no_sequential):
     """This function generates a single password"""
     characters = ''
+    
     if not no_upper:
         characters += string.ascii_uppercase
     if not no_lower:
@@ -127,13 +129,25 @@ def generate_single_password(length, no_upper, no_lower, no_digits, no_special,
 
     passwor = ''
     if begin_letter:
-        passwor += random.choice(string.ascii_letters)
+        if no_upper and no_lower:
+            passwor += random.choice(string.digits + string.punctuation)            
+        elif no_upper:
+            passwor += random.choice(string.ascii_lowercase)
+        elif no_lower:
+            passwor += random.choice(string.ascii_uppercase)
+        else:
+            passwor += random.choice(string.ascii_letters)
     elif begin_number:
-        passwor += random.choice(string.digits)
+        if no_digits:
+            passwor += random.choice(string.punctuation + string.ascii_letters)
+        else:            
+            passwor += random.choice(string.digits)
     elif begin_special:
         passwor += random.choice(string.punctuation)
+    else:
+        passwor += random.choice(characters)
 
-    passwor += ''.join(random.sample(characters, length - len(passwor)))
+    passwor += ''.join(random.sample(characters, length - 1))
 
 
 
